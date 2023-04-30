@@ -1,0 +1,86 @@
+version: "3"
+services:
+  diagnosis-service:
+    build:
+      context: ./diagnosis-service
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./diagnosis-service/.env
+    networks:
+      - backend
+    volumes:
+      - ./diagnosis-service:/app/diagnosis-service
+      - /app/diagnosis-service/node_modules
+    depends_on:
+      - "postgres"
+      - "rabbitmq"
+
+  notification-service:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - "5002:5002"
+    env_file:
+      - ./notification-service/.env
+    networks:
+      - backend
+    volumes:
+      - ./notification-service:/app/notification-service
+      - /app/notification-service/node_modules
+    depends_on:
+      - "postgres"
+      - "rabbitmq"
+  
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=12345
+    volumes:
+      - rabbit_data:/var/lib/rabbitmq
+    networks:
+      - backend
+
+  redis:
+    image: redis:latest
+    restart: always
+    command: redis-server --save 20 1 --loglevel warning --requirepass 12345
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6380:6380"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+    
+volumes:
+  pg_data:
+    driver: local
+  rabbit_data:
+    driver: local
+  redis_data:
+    driver: local

@@ -1,0 +1,14 @@
+{
+  "name": "mpharma-microservices",
+  "version": "1.0.0",
+  "description": "mPharma  Microservices",
+  "scripts": {
+    "up": "docker-compose -f docker-compose.yml up -d",
+    "down": "docker-compose -f docker-compose.yml down"
+  },
+  "keywords": [
+    "microservices"
+  ],
+  "author": "Ogbonna Vitalis",
+  "license": "MIT"
+}

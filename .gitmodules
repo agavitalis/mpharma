@@ -1,0 +1,7 @@
+[submodule "diagnosis-service"]
+	path = diagnosis-service
+	url = https://github.com/agavitalis/mpharma-diagnosis-service.git
+[submodule "notification-service"]
+	path = notification-service
+	url = https://github.com/agavitalis/mpharma-notification-service.git
+
