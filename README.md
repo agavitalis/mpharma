@@ -34,7 +34,8 @@ docker-compose up
 ```
 ## Docker Notes:
 - Use `name` of the service to connect service internally with docker compose environment.
-- for rebuild services use command `docker-compose up --build`.  
+- for rebuild services use command `docker-compose up --build`. 
+- for shutdown the docker container  use command `docker-compose down`.  
 
 # To access diagnosis-service : http://localhost:5001
 
