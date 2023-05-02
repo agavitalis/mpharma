@@ -11,10 +11,10 @@ mPharma Diagnosis Microservices quick app using **NestJS / RabbitMQ**.
 ## Get started Notes:
 - Use `git submodule update --init --recursive` command to update/fetch submodules.
 - Update `.env` file with the necessary credentials 
-- Diagnosis-service endpoint: `host:port/api/health`
-- Notification-service endpoint: `host:port/api/docs`
+- Diagnosis-service endpoint: `http://localhost:5001`
+- Notification-service endpoint: `http://localhost:5002`
 
-## Run in local(Individual service)
+## Run in local(Individual service): **Not recommended**
 
 To start diagnosis-service folder `cd diagnosis-service`
 ```bash
@@ -28,7 +28,7 @@ npm install
 npm run start:dev
 ```
 
-## Run Local Env in docker-compose 
+## Run Local Env (Using Docker): **Recommended**
 ```bash
 docker-compose up
 ```
@@ -36,7 +36,7 @@ docker-compose up
 - Use `name` of the service to connect service internally with docker compose environment.
 - for rebuild services use command `docker-compose up --build`.  
 
-# To access diagnosis-service : http://192.168.49.2:30353
+# To access diagnosis-service : http://localhost:5001
 
-# To access notification-service : http://192.168.49.2:30353
+# To access notification-service : http://localhost:5002
 
